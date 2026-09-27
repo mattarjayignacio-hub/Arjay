@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MattOOP Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">M</span>
+          <span>MattOOP</span>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#task-manager">Tasks</a>
+          <a href="#analytics">Analytics</a>
+          <a href="#about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <span class="eyebrow">Productivity Dashboard</span>
+            <h1>Keep your day organized and stress-free.</h1>
+            <p>
+              Track your tasks, prioritize what matters, and finish the work that moves
+              your goals forward.
+            </p>
+            <div class="hero-actions">
+              <a href="#task-manager" class="btn btn-primary">Create Task</a>
+              <a href="#analytics" class="btn btn-secondary">View Stats</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="mini-card">
+              <span>Today</span>
+              <strong>5 tasks</strong>
+            </div>
+            <div class="mini-card highlight">
+              <span>Priority</span>
+              <strong>2 urgent</strong>
+            </div>
+            <div class="mini-card">
+              <span>Remaining</span>
+              <strong>3 open</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="task-manager" class="task-section">
+        <div class="container task-layout">
+          <aside class="panel form-panel">
+            <div class="panel-header">
+              <h2 id="formTitle">Add New Task</h2>
+            </div>
+
+            <form id="taskForm" novalidate>
+              <div class="field-group">
+                <label for="taskTitle">Task Title</label>
+                <input id="taskTitle" name="taskTitle" type="text" maxlength="80" placeholder="e.g. Finish project report" />
+              </div>
+
+              <div class="field-row two-col">
+                <div class="field-group">
+                  <label for="taskCategory">Category</label>
+                  <select id="taskCategory" name="taskCategory">
+                    <option value="Study">Study</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Errands">Errands</option>
+                    <option value="Health">Health</option>
+                  </select>
+                </div>
+
+                <div class="field-group">
+                  <label for="taskPriority">Priority</label>
+                  <select id="taskPriority" name="taskPriority">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="taskDueDate">Due Date</label>
+                <input id="taskDueDate" name="taskDueDate" type="date" />
+              </div>
+
+              <div class="field-group">
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" name="taskDescription" rows="4" placeholder="Brief details about the task..."></textarea>
+              </div>
+
+              <div class="button-row">
+                <button class="btn btn-primary" type="submit" id="submitButton">Add Task</button>
+                <button class="btn btn-secondary hidden" type="button" id="cancelEdit">Cancel</button>
+              </div>
+              <p id="formMessage" class="form-message" aria-live="polite"></p>
+            </form>
+          </aside>
+
+          <section class="panel task-panel">
+            <div class="panel-header task-toolbar">
+              <h2>Task List</h2>
+              <div class="filters">
+                <input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks" />
+                <select id="statusFilter" aria-label="Filter by status">
+                  <option value="all">All</option>
+                  <option value="active">Active</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="taskList" class="task-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="analytics" class="stats-section">
+        <div class="container stats-grid">
+          <article class="stat-card">
+            <span>Total Tasks</span>
+            <strong id="totalTasks">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Completed</span>
+            <strong id="completedTasks">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Pending</span>
+            <strong id="pendingTasks">0</strong>
+          </article>
+          <article class="stat-card accent">
+            <span>High Priority</span>
+            <strong id="highPriorityTasks">0</strong>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container about-box">
+          <h2>Why use MattOOP?</h2>
+          <p>
+            This simple task manager helps students and professionals stay focused by
+            organizing responsibilities, monitoring deadlines, and reducing daily stress.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 MattOOP Task Manager</p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
