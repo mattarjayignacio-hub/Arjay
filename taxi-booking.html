@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3c84b" />
+    <meta name="description" content="Book a local taxi ride with a clear estimate before you go." />
+    <title>Cabby | Book a ride</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/taxi.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="js/taxi.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Cabby home">
+        <span class="brand-icon" aria-hidden="true">C</span>
+        <span>cabby<span class="brand-period">.</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#rides">Our rides</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+      <a class="header-link" href="#book">Book a ride <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Your city, your way</p>
+          <h1 id="hero-title">Good rides.<br /><span>Good timing.</span></h1>
+          <p class="hero-description">A comfortable ride is just a few details away. Choose your car and see your fare before you go.</p>
+          <a class="text-link" href="#book">Plan your trip <span aria-hidden="true">↓</span></a>
+          <div class="hero-note"><span class="note-icon" aria-hidden="true">✳</span><span><strong>No surprises.</strong><br />See an estimate before booking.</span></div>
+        </div>
+        <div class="hero-image-wrap">
+          <img class="hero-image" src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1400&q=85" alt="A yellow city taxi ready for a passenger" />
+          <div class="image-sticker"><strong>On your</strong><br />way.</div>
+          <p class="image-caption">THE CITY LOOKS BETTER FROM HERE <span>01 / 03</span></p>
+        </div>
+      </section>
+
+      <section class="booking-section" id="book" aria-labelledby="booking-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Let's get you there</p>
+            <h2 id="booking-title">Where to?</h2>
+          </div>
+          <p class="section-aside">Simple booking, upfront estimate.</p>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+          <div class="route-fields">
+            <div class="input-field location-field">
+              <div class="field-label"><span class="field-dot pickup-dot"></span><label for="pickup">Pickup</label></div>
+              <div class="location-control">
+                <input id="pickup" name="pickup" type="text" placeholder="Search for a pickup" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="pickupSuggestions" aria-expanded="false" required />
+                <button class="gps-button" id="useMyLocation" type="button" title="Use your current location">Use GPS</button>
+              </div>
+              <div class="suggestions" id="pickupSuggestions" role="listbox" hidden></div>
+            </div>
+            <span class="route-line" aria-hidden="true"></span>
+            <div class="input-field location-field">
+              <div class="field-label"><span class="field-dot dropoff-dot"></span><label for="dropoff">Destination</label></div>
+              <input id="dropoff" name="dropoff" type="text" placeholder="Search for a destination" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="dropoffSuggestions" aria-expanded="false" required />
+              <div class="suggestions" id="dropoffSuggestions" role="listbox" hidden></div>
+            </div>
+          </div>
+          <label class="input-field date-field">
+            <span class="field-label">Pickup time</span>
+            <input id="pickupTime" name="pickupTime" type="datetime-local" required />
+          </label>
+          <button class="submit-button" type="submit">Get fare estimate <span aria-hidden="true">→</span></button>
+        </form>
+
+        <section class="route-map-section" aria-labelledby="routeMapTitle">
+          <div class="route-map-heading">
+            <h3 id="routeMapTitle">Your route</h3>
+            <p id="routeStatus" role="status" aria-live="polite">Search for a pickup and destination to see your route.</p>
+          </div>
+          <div id="routeMap" aria-label="Map showing your pickup and destination"></div>
+          <p class="map-credit">Map and location data © OpenStreetMap contributors. Routes provided by OSRM.</p>
+        </section>
+
+        <fieldset class="ride-options" id="rides">
+          <legend>Choose your ride</legend>
+          <label class="ride-option selected">
+            <input type="radio" name="ride" value="city" data-price="8" checked />
+            <span class="ride-image"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=480&q=80" alt="Compact city car" loading="lazy" /></span>
+            <span class="ride-info"><strong>City</strong><small>Quick trips · 3 seats</small></span>
+            <span class="ride-price">from ₱464</span>
+          </label>
+          <label class="ride-option">
+            <input type="radio" name="ride" value="comfort" data-price="13" />
+            <span class="ride-image"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=480&q=80" alt="Comfortable premium sedan" loading="lazy" /></span>
+            <span class="ride-info"><strong>Comfort</strong><small>Extra room · 3 seats</small></span>
+            <span class="ride-price">from ₱754</span>
+          </label>
+          <label class="ride-option">
+            <input type="radio" name="ride" value="XL" data-price="19" />
+            <span class="ride-image"><img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=480&q=80" alt="Spacious family car" loading="lazy" /></span>
+            <span class="ride-info"><strong>Cab XL</strong><small>Room for everyone · 6 seats</small></span>
+            <span class="ride-price">from ₱1,102</span>
+          </label>
+        </fieldset>
+
+        <div class="booking-result" id="bookingResult" role="status" aria-live="polite" hidden></div>
+        <p class="price-note">Fare includes distance at US$0.75/km, converted at US$1 = ₱58.</p>
+      </section>
+
+      <section class="how-section" id="how-it-works" aria-labelledby="how-title">
+        <div class="how-title">
+          <p class="eyebrow">Easy as 1, 2, 3</p>
+          <h2 id="how-title">A little less waiting.<br />A lot more going.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><span>01</span><h3>Set your route</h3><p>Tell us where to pick you up and where you're headed.</p></article>
+          <article class="step"><span>02</span><h3>Pick your ride</h3><p>Choose the car that feels right for your trip.</p></article>
+          <article class="step"><span>03</span><h3>You're on your way</h3><p>Get your estimate and booking summary in one place.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><a class="brand" href="#top"><span class="brand-icon" aria-hidden="true">C</span><span>cabby<span class="brand-period">.</span></span></a><p>Made for the way your city moves.</p><span>© 2026 Cabby</span></footer>
+  </body>
+</html>
